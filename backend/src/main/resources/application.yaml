@@ -11,3 +11,10 @@ spring:
     mongodb:
       uri: 'mongodb://rootuser:rootpass@localhost:27018/mini-agro?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false'
       auto-index-creation: true
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    url: /v3/api-docs
+  api-docs:
+    enabled: true
