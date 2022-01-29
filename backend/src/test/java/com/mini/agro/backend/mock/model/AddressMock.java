@@ -1,4 +1,4 @@
-package com.mini.agro.backend.mock;
+package com.mini.agro.backend.mock.model;
 
 import com.mini.agro.backend.model.entity.Address;
 
