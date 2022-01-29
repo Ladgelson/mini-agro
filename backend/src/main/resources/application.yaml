@@ -1,0 +1,13 @@
+server:
+  port: 8081
+  servlet:
+    contextPath: '/'
+    application-display-name: 'mini-agro-backend'
+
+spring:
+  application:
+    name: 'mini-agro-backend'
+  data:
+    mongodb:
+      uri: 'mongodb://rootuser:rootpass@localhost:27018/mini-agro?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false'
+      auto-index-creation: true
