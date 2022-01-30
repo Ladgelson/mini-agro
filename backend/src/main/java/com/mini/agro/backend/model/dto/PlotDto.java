@@ -1,8 +1,7 @@
 package com.mini.agro.backend.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mini.agro.backend.model.entity.Address;
-import com.mini.agro.backend.model.entity.Plot;
+import com.mini.agro.backend.model.entity.ProductionRecord;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,31 +10,25 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FarmDto {
+public class PlotDto {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private String id;
 
     @NotNull
-    private String cnpj;
+    private Long area;
 
-    @NotNull
-    private String legalName;
-
-    @NotNull
-    private String tradeName;
-
-    @NotNull
-    private Address address;
-
-    private List<Plot> plots;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    private List<ProductionRecord> productions = new ArrayList<>();
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
