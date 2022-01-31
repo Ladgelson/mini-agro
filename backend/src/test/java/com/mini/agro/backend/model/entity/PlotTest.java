@@ -26,7 +26,7 @@ class PlotTest {
 
     @Test
     void setProductions() {
-        List<ProductionRecord> productionsTest = List.of();
+        List<String> productionsTest = List.of();
         plot.setProductions(productionsTest);
         Assertions.assertEquals(Optional.of(productionsTest), Optional.ofNullable(plot.getProductions()));
     }
