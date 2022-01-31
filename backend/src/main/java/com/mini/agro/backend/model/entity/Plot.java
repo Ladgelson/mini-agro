@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public class Plot extends AbstractModel {
 
     private Long area;
 
-    @DBRef(lazy = true)
-    private List<ProductionRecord> productions = new ArrayList<>();
+    private List<String> productions = new ArrayList<>();
 
 }
