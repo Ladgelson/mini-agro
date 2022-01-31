@@ -1,6 +1,6 @@
 package com.mini.agro.backend.model.entity;
 
-import com.mini.agro.backend.model.entity.base.AbstractModel;
+import com.mini.agro.backend.model.enumeration.TypeCommodity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Commodity extends AbstractModel {
+public class Commodity {
 
     private String name;
+
+    private TypeCommodity typeCommodity;
 
 }

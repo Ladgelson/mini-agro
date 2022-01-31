@@ -26,6 +26,6 @@ public interface SaveProductionRecordController {
                     )}),
             @ApiResponse(responseCode = "400", description = "Missing or invalid request body", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)})
-    @PostMapping("/{id}/plots")
+    @PostMapping("/{id}/production-records")
     ResponseEntity<ProductionRecordDto> process(@RequestBody @Validated ProductionRecordDto dto, @PathVariable String id);
 }

@@ -25,7 +25,7 @@ public class SaveProductionRecordServiceImpl implements SaveProductionRecordServ
     public ProductionRecord execute(ProductionRecord entity, String plotId) {
         Plot plotFound = findPlotByIdService.execute(plotId);
         ProductionRecord productionRecordSaved = repository.save(entity);
-        plotFound.getProductions().add(productionRecordSaved);
+        plotFound.getProductions().add(productionRecordSaved.getId());
         plotRepository.save(plotFound);
         return productionRecordSaved;
     }

@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,12 +19,22 @@ public class ProductionRecord extends AbstractModel {
 
     private Commodity commodity;
 
-    private Long plantsByHectare;
+    private BigDecimal plantsByHectare;
 
-    private Long podsByPlant;
+    private BigDecimal podsByPlant;
 
-    private Long grainsByPod;
+    private BigDecimal grainsByPod;
 
-    private Long weightByOneKGrains;
+    private BigDecimal weightByOneKGrains;
+
+    public BigDecimal getProductivity() {
+        BigDecimal staticValue = BigDecimal.valueOf(60000);
+        return plantsByHectare
+                .multiply(podsByPlant)
+                .multiply(grainsByPod)
+                .multiply(weightByOneKGrains)
+                .divide(staticValue, RoundingMode.HALF_UP)
+                .setScale(1, RoundingMode.HALF_UP);
+    }
 
 }
