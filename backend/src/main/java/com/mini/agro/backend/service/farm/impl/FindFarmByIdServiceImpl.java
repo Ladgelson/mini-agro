@@ -4,7 +4,9 @@ import com.mini.agro.backend.model.entity.Farm;
 import com.mini.agro.backend.repository.FarmRepository;
 import com.mini.agro.backend.service.farm.FindFarmByIdService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @AllArgsConstructor
@@ -14,6 +16,7 @@ public class FindFarmByIdServiceImpl implements FindFarmByIdService {
 
     @Override
     public Farm executeSearch(String id) {
-        return repository.findById(id).get();
+        return repository.findById(id)
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Farm not found", null));
     }
 }

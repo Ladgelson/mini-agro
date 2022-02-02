@@ -1,6 +1,6 @@
-package com.mini.agro.backend.controller.impl;
+package com.mini.agro.backend.controller.plot.impl;
 
-import com.mini.agro.backend.controller.SavePlotController;
+import com.mini.agro.backend.controller.plot.SavePlotController;
 import com.mini.agro.backend.mapper.PlotMapper;
 import com.mini.agro.backend.model.dto.PlotDto;
 import com.mini.agro.backend.model.entity.Plot;

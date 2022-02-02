@@ -1,6 +1,6 @@
-package com.mini.agro.backend.controller.impl;
+package com.mini.agro.backend.controller.productivity.impl;
 
-import com.mini.agro.backend.controller.CalculateProductionByPlotController;
+import com.mini.agro.backend.controller.productivity.CalculateProductionByPlotController;
 import com.mini.agro.backend.model.dto.ProductivityDto;
 import com.mini.agro.backend.service.productivity.CalculateProductionByPlotService;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.mini.agro.backend.controller;
+package com.mini.agro.backend.controller.farm;
 
 import com.mini.agro.backend.model.dto.FarmDto;
 import io.swagger.v3.oas.annotations.Operation;

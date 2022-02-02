@@ -1,6 +1,6 @@
-package com.mini.agro.backend.controller.impl;
+package com.mini.agro.backend.controller.farm.impl;
 
-import com.mini.agro.backend.controller.FindFarmController;
+import com.mini.agro.backend.controller.farm.FindFarmController;
 import com.mini.agro.backend.mapper.FarmMapper;
 import com.mini.agro.backend.model.dto.FarmDto;
 import com.mini.agro.backend.service.farm.FindFarmService;

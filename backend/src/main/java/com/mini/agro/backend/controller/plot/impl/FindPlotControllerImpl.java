@@ -1,6 +1,6 @@
-package com.mini.agro.backend.controller.impl;
+package com.mini.agro.backend.controller.plot.impl;
 
-import com.mini.agro.backend.controller.FindPlotController;
+import com.mini.agro.backend.controller.plot.FindPlotController;
 import com.mini.agro.backend.mapper.PlotMapper;
 import com.mini.agro.backend.model.dto.PlotDto;
 import com.mini.agro.backend.service.plot.FindPlotService;
