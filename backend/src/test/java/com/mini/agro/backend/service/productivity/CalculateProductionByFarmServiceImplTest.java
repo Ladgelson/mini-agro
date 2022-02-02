@@ -1,4 +1,4 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.productivity;
 
 import com.mini.agro.backend.mock.dto.ProductivityDtoMock;
 import com.mini.agro.backend.mock.model.FarmMock;

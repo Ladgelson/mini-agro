@@ -1,4 +1,4 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.plot;
 
 import com.mini.agro.backend.mock.model.PlotMock;
 import com.mini.agro.backend.model.entity.Plot;

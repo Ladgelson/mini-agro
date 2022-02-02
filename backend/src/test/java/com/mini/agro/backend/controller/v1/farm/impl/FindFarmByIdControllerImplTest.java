@@ -1,9 +1,8 @@
-package com.mini.agro.backend.controller.impl;
+package com.mini.agro.backend.controller.v1.farm.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mini.agro.backend.mock.model.FarmMock;
 import com.mini.agro.backend.model.entity.Farm;
-import com.mini.agro.backend.service.farm.SaveFarmService;
+import com.mini.agro.backend.service.farm.FindFarmByIdService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,42 +14,40 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class SaveFarmControllerImplTest {
-
-    @Autowired
-    private ObjectMapper mapper;
+class FindFarmByIdControllerImplTest {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
-    private SaveFarmService saveFarmService;
+    private FindFarmByIdService findFarmByIdService;
 
     private Farm farmMock;
 
+    private String id;
+
     @BeforeEach
     void setUp() {
+        id = "1";
         farmMock = FarmMock.createFarm();
-        Mockito.when(saveFarmService.executeSave(any()))
+        Mockito.when(findFarmByIdService.executeSearch(id))
                 .thenReturn(farmMock);
     }
 
     @Test
-    @DisplayName("Must save a new Farm")
+    @DisplayName("Must returns a valid farm")
     void process() throws Exception {
-        mvc.perform(post("/v1/farms")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(farmMock)))
-                .andExpect(status().isCreated())
+        mvc.perform(get("/v1/farms/"+id)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.cnpj").value(farmMock.getCnpj()))
                 .andExpect(jsonPath("$.legalName").value(farmMock.getLegalName()))
                 .andExpect(jsonPath("$.tradeName").value(farmMock.getTradeName()))
@@ -60,15 +57,5 @@ class SaveFarmControllerImplTest {
                 .andExpect(jsonPath("$.address.street").value(farmMock.getAddress().getStreet()))
                 .andExpect(jsonPath("$.address.zipCode").value(farmMock.getAddress().getZipCode()))
                 .andExpect(jsonPath("$.address.number").value(farmMock.getAddress().getNumber()));
-    }
-
-    @Test
-    @DisplayName("Must throw exception when required field is missing")
-    void processWhenRequiredFieldIsMissing() throws Exception {
-        farmMock.setCnpj(null);
-        mvc.perform(post("/v1/farms")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(farmMock)))
-                .andExpect(status().isBadRequest());
     }
 }

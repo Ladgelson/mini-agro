@@ -1,4 +1,4 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.farm;
 
 import com.mini.agro.backend.mock.model.FarmMock;
 import com.mini.agro.backend.model.entity.Farm;

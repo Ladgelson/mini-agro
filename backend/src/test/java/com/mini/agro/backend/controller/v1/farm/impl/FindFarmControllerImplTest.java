@@ -1,4 +1,4 @@
-package com.mini.agro.backend.controller.impl;
+package com.mini.agro.backend.controller.v1.farm.impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

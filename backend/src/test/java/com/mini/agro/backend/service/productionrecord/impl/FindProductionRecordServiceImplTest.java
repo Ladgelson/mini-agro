@@ -1,13 +1,12 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.productionrecord.impl;
 
-import com.mini.agro.backend.mock.dto.ProductivityDtoMock;
 import com.mini.agro.backend.mock.model.PlotMock;
 import com.mini.agro.backend.mock.model.ProductionRecordMock;
-import com.mini.agro.backend.model.dto.ProductivityDto;
 import com.mini.agro.backend.model.entity.Plot;
+import com.mini.agro.backend.model.entity.ProductionRecord;
 import com.mini.agro.backend.repository.ProductionRecordRepository;
-import com.mini.agro.backend.service.productivity.CalculateProductionByPlotService;
 import com.mini.agro.backend.service.plot.FindPlotByIdService;
+import com.mini.agro.backend.service.productionrecord.FindProductionRecordService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,14 +18,15 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class CalculateProductionByPlotServiceImplTest {
+class FindProductionRecordServiceImplTest {
 
     @Autowired
-    private CalculateProductionByPlotService calculateProductionByPlotService;
+    private FindProductionRecordService findProductionRecordService;
 
     @MockBean
     private FindPlotByIdService findPlotByIdService;
@@ -34,23 +34,23 @@ class CalculateProductionByPlotServiceImplTest {
     @MockBean
     private ProductionRecordRepository productionRecordRepository;
 
+    private Plot plotMock;
+
     @BeforeEach
     void setUp() {
-        Plot plot = PlotMock.createPlot();
-        Mockito.when(findPlotByIdService.execute("1"))
-                .thenReturn(plot);
+        plotMock = PlotMock.createPlot();
 
-        Mockito.when(productionRecordRepository.findAllById(List.of(plot.getProductions().get(0))))
+        Mockito.when(findPlotByIdService.execute("1"))
+                .thenReturn(plotMock);
+
+        Mockito.when(productionRecordRepository.findAllById(any()))
                 .thenReturn(List.of(ProductionRecordMock.createProductionRecord()));
     }
 
     @Test
-    @DisplayName("Must calculate productivity about a plot")
+    @DisplayName("Must a valid list of production record")
     void process() {
-        ProductivityDto result = calculateProductionByPlotService.calculateProduction("1");
-        ProductivityDto mock = ProductivityDtoMock.createProductivityDto();
-        assertEquals(mock.getArea(), result.getArea());
-        assertEquals(mock.getProductivity(), result.getProductivity());
-        assertEquals(mock.getTotal(), result.getTotal());
+        List<ProductionRecord> productionRecords = findProductionRecordService.process("1");
+        assertEquals(List.of(ProductionRecordMock.createProductionRecord()).size(), productionRecords.size());
     }
 }

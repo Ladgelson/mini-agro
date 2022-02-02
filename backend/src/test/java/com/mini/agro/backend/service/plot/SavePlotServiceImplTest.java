@@ -1,4 +1,4 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.plot;
 
 import com.mini.agro.backend.mock.model.FarmMock;
 import com.mini.agro.backend.mock.model.PlotMock;
@@ -36,9 +36,6 @@ class SavePlotServiceImplTest {
 
     @MockBean
     private FarmRepository farmRepository;
-
-    @Mock
-    private Farm farmMock;
 
     private Plot plot;
 

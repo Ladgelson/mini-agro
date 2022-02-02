@@ -1,7 +1,6 @@
 package com.mini.agro.backend.mock.model;
 
 import com.mini.agro.backend.model.entity.Commodity;
-import com.mini.agro.backend.model.entity.Farm;
 import com.mini.agro.backend.model.entity.ProductionRecord;
 import com.mini.agro.backend.model.enumeration.TypeCommodity;
 
