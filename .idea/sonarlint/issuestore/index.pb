@@ -43,7 +43,5 @@ Pbackend/src/main/java/com/mini/agro/backend/model/enumeration/TypeCommodity.jav
 Mbackend/src/test/java/com/mini/agro/backend/mock/dto/ProductivityDtoMock.java,3\3\33210ce2d35af3fd9ae52ecb8cb6f0b48137a9dc
 u
 Ebackend/src/main/java/com/mini/agro/backend/model/entity/Address.java,4\f\4f69436a19456e94fb607b587f66b74165385155
-x
-Hbackend/src/test/java/com/mini/agro/backend/BackendApplicationTests.java,e\3\e39a0b39f2ec5e6f26c488e53fdb62a9588eee4e
 ~
 Nbackend/src/main/java/com/mini/agro/backend/controller/SaveFarmController.java,9\6\9639405e2d97067cbdcdca35fb70a85906b11f59

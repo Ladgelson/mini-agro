@@ -1,6 +1,6 @@
-package com.mini.agro.backend.controller.farm;
+package com.mini.agro.backend.controller.v1.productivity;
 
-import com.mini.agro.backend.model.dto.FarmDto;
+import com.mini.agro.backend.model.dto.ProductivityDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,18 +12,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Tag(name = "Farm", description = "Resource to manage data about Farms")
-@RequestMapping("/v1/farms")
-public interface FindFarmByIdController {
-    @Operation(description = "Find a valid Farm")
+@Tag(name = "Productivity", description = "Calculate the productivity about a domain")
+@RequestMapping("/v1/plots")
+public interface CalculateProductionByPlotController {
+    @Operation(description = "Calculate a productivity")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Farm found", content = {
+            @ApiResponse(responseCode = "200", description = "Productivity calculated by Plot", content = {
                     @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = FarmDto.class)
+                            schema = @Schema(implementation = ProductivityDto.class)
                     )}),
-            @ApiResponse(responseCode = "400", description = "Missing or invalid path variable", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)})
-    @GetMapping("/{id}")
-    ResponseEntity<FarmDto> process(@PathVariable String id);
+    @GetMapping("/{id}/productivity")
+    ResponseEntity<ProductivityDto> process(@PathVariable String id);
 }

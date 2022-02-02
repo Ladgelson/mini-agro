@@ -1,6 +1,6 @@
-package com.mini.agro.backend.controller.productionrecord.impl;
+package com.mini.agro.backend.controller.v1.productionrecord.impl;
 
-import com.mini.agro.backend.controller.productionrecord.FindProductionRecordByPlotIdController;
+import com.mini.agro.backend.controller.v1.productionrecord.FindProductionRecordByPlotIdController;
 import com.mini.agro.backend.mapper.ProductionRecordMapper;
 import com.mini.agro.backend.model.dto.ProductionRecordDto;
 import com.mini.agro.backend.model.entity.ProductionRecord;

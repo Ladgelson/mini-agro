@@ -1,6 +1,6 @@
-package com.mini.agro.backend.controller.plot;
+package com.mini.agro.backend.controller.v1.productionrecord;
 
-import com.mini.agro.backend.model.dto.PlotDto;
+import com.mini.agro.backend.model.dto.ProductionRecordDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,21 +15,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@Tag(name = "Plot", description = "Resource to manage data about Plots of Farms")
-@RequestMapping("/v1/farms")
-public interface FindPlotController {
-    @Operation(description = "Find a list of Plots")
+@Tag(name = "ProductionRecord", description = "Resource to manage data about productions of plots")
+@RequestMapping("/v1/plots")
+public interface FindProductionRecordByPlotIdController {
+    @Operation(description = "Find a list of Production Records")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "List of Plots found", content = {
+            @ApiResponse(responseCode = "200", description = "List of Production Records found", content = {
                     @Content(
                             mediaType = "application/json",
                             array = @ArraySchema(
-                                    schema = @Schema(implementation = PlotDto.class)
+                                    schema = @Schema(implementation = ProductionRecordDto.class)
                             )
                     )}),
-            @ApiResponse(responseCode = "404", description = "Farm not found", content = @Content),
+            @ApiResponse(responseCode = "204", description = "No one Production Record found", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Plot not found", content = @Content),
             @ApiResponse(responseCode = "400", description = "Missing or invalid path variable", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)})
-    @GetMapping("/{id}/plots")
-    ResponseEntity<List<PlotDto>> process(@PathVariable String id);
+    @GetMapping("/{id}/production-records")
+    ResponseEntity<List<ProductionRecordDto>> process(@PathVariable String id);
 }

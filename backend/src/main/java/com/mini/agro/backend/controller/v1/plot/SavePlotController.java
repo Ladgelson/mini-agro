@@ -1,6 +1,6 @@
-package com.mini.agro.backend.controller.productionrecord;
+package com.mini.agro.backend.controller.v1.plot;
 
-import com.mini.agro.backend.model.dto.ProductionRecordDto;
+import com.mini.agro.backend.model.dto.PlotDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Tag(name = "ProductionRecord", description = "Resource to manage data about productions of plots")
-@RequestMapping("/v1/plots")
-public interface SaveProductionRecordController {
-    @Operation(description = "Create a new Production Record")
+@Tag(name = "Plot", description = "Resource to manage data about Plots of Farms")
+@RequestMapping("/v1/farms")
+public interface SavePlotController {
+    @Operation(description = "Create a new Plot")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Production Record saved", content = {
+            @ApiResponse(responseCode = "201", description = "Plot successfully saved", content = {
                     @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = ProductionRecordDto.class)
+                            schema = @Schema(implementation = PlotDto.class)
                     )}),
             @ApiResponse(responseCode = "400", description = "Missing or invalid request body", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)})
-    @PostMapping("/{id}/production-records")
-    ResponseEntity<ProductionRecordDto> process(@RequestBody @Validated ProductionRecordDto dto, @PathVariable String id);
+    @PostMapping("/{id}/plots")
+    ResponseEntity<PlotDto> executeSave(@RequestBody @Validated PlotDto plotDto, @PathVariable String id);
 }
