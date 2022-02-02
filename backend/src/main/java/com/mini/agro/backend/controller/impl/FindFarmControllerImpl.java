@@ -3,7 +3,7 @@ package com.mini.agro.backend.controller.impl;
 import com.mini.agro.backend.controller.FindFarmController;
 import com.mini.agro.backend.mapper.FarmMapper;
 import com.mini.agro.backend.model.dto.FarmDto;
-import com.mini.agro.backend.service.FindFarmService;
+import com.mini.agro.backend.service.farm.FindFarmService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

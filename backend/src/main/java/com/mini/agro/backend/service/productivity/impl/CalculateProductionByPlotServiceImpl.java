@@ -1,11 +1,11 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.productivity.impl;
 
 import com.mini.agro.backend.model.dto.ProductivityDto;
 import com.mini.agro.backend.model.entity.Plot;
 import com.mini.agro.backend.model.entity.ProductionRecord;
 import com.mini.agro.backend.repository.ProductionRecordRepository;
-import com.mini.agro.backend.service.CalculateProductionByPlotService;
-import com.mini.agro.backend.service.FindPlotByIdService;
+import com.mini.agro.backend.service.productivity.CalculateProductionByPlotService;
+import com.mini.agro.backend.service.plot.FindPlotByIdService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

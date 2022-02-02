@@ -1,9 +1,9 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.farm.impl;
 
 import com.mini.agro.backend.mapper.FarmMapper;
 import com.mini.agro.backend.model.entity.Farm;
 import com.mini.agro.backend.repository.FarmRepository;
-import com.mini.agro.backend.service.FindFarmService;
+import com.mini.agro.backend.service.farm.FindFarmService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

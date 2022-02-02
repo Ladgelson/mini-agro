@@ -4,7 +4,7 @@ import com.mini.agro.backend.controller.SaveFarmController;
 import com.mini.agro.backend.mapper.FarmMapper;
 import com.mini.agro.backend.model.dto.FarmDto;
 import com.mini.agro.backend.model.entity.Farm;
-import com.mini.agro.backend.service.SaveFarmService;
+import com.mini.agro.backend.service.farm.SaveFarmService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class SaveFarmControllerImpl implements SaveFarmController {
 
-    private SaveFarmService saveFarmService;
+    private final SaveFarmService saveFarmService;
 
-    private FarmMapper mapper;
+    private final FarmMapper mapper;
 
     @Override
     public ResponseEntity<FarmDto> process(FarmDto dto) {

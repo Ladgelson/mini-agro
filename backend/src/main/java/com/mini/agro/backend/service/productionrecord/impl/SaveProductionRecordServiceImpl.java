@@ -1,11 +1,11 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.productionrecord.impl;
 
 import com.mini.agro.backend.model.entity.Plot;
 import com.mini.agro.backend.model.entity.ProductionRecord;
 import com.mini.agro.backend.repository.PlotRepository;
 import com.mini.agro.backend.repository.ProductionRecordRepository;
-import com.mini.agro.backend.service.FindPlotByIdService;
-import com.mini.agro.backend.service.SaveProductionRecordService;
+import com.mini.agro.backend.service.plot.FindPlotByIdService;
+import com.mini.agro.backend.service.productionrecord.SaveProductionRecordService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

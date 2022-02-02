@@ -2,7 +2,6 @@ package com.mini.agro.backend.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mini.agro.backend.model.entity.Address;
-import com.mini.agro.backend.model.entity.Plot;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +34,9 @@ public class FarmDto {
     @NotNull
     private Address address;
 
-    private List<Plot> plots;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    private List<String> plots;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)

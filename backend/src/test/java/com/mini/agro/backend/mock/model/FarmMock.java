@@ -2,6 +2,7 @@ package com.mini.agro.backend.mock.model;
 
 import com.mini.agro.backend.model.entity.Farm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FarmMock {
@@ -12,7 +13,7 @@ public class FarmMock {
                 .address(AddressMock.createAdress())
                 .legalName("Fazenda Superior")
                 .tradeName("mini-fazenda")
-                .plots(List.of(PlotMock.createPlot()))
+                .plots(new ArrayList<>(List.of("61f6ffd5d7d3c1650890183d")))
                 .build();
     }
 }

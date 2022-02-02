@@ -6,50 +6,59 @@ import com.mini.agro.backend.model.entity.Farm;
 import com.mini.agro.backend.model.entity.Plot;
 import com.mini.agro.backend.repository.FarmRepository;
 import com.mini.agro.backend.repository.PlotRepository;
-import com.mini.agro.backend.service.plot.FindPlotService;
+import com.mini.agro.backend.service.farm.FindFarmByIdService;
+import com.mini.agro.backend.service.plot.SavePlotService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class FindPlotServiceImplTest {
+class SavePlotServiceImplTest {
 
     @Autowired
-    private FindPlotService findPlotService;
+    private SavePlotService savePlotService;
 
     @MockBean
-    private FarmRepository farmRepository;
+    private FindFarmByIdService findFarmByIdService;
 
     @MockBean
     private PlotRepository plotRepository;
 
+    @MockBean
+    private FarmRepository farmRepository;
+
+    @Mock
     private Farm farmMock;
+
+    private Plot plot;
 
     @BeforeEach
     void setUp() {
-        farmMock = FarmMock.createFarm();
-        Mockito.when(farmRepository.findById("1"))
-                .thenReturn(Optional.of(farmMock));
-        Mockito.when(plotRepository.findAllById(any()))
-                .thenReturn(List.of(PlotMock.createPlot()));
+        plot = PlotMock.createPlot();
+        Mockito.when(findFarmByIdService.executeSearch("1"))
+                .thenReturn(FarmMock.createFarm());
+        Mockito.when(plotRepository.save(plot))
+                .thenReturn(plot);
+        Mockito.when(farmRepository.save(any()))
+                .thenReturn(FarmMock.createFarm());
+
     }
 
     @Test
-    @DisplayName("Must returns a list of plots of a farm")
-    void process() {
-        List<Plot> plots = findPlotService.process("1");
-        assertEquals(farmMock.getPlots().size(), plots.size());
+    @DisplayName("Must save a valid plot")
+    void executeSave() {
+        Plot plotSaved = savePlotService.executeSave(plot, "1");
+        assertEquals(plot.getArea(), plotSaved.getArea());
+        assertEquals(plot.getProductions(), plotSaved.getProductions());
     }
 }

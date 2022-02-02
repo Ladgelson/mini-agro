@@ -1,9 +1,8 @@
 package com.mini.agro.backend.controller.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mini.agro.backend.mock.model.FarmMock;
 import com.mini.agro.backend.model.entity.Farm;
-import com.mini.agro.backend.service.FindFarmByIdService;
+import com.mini.agro.backend.service.farm.FindFarmByIdService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

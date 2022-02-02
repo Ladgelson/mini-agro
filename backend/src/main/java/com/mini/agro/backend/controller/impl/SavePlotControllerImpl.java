@@ -4,7 +4,7 @@ import com.mini.agro.backend.controller.SavePlotController;
 import com.mini.agro.backend.mapper.PlotMapper;
 import com.mini.agro.backend.model.dto.PlotDto;
 import com.mini.agro.backend.model.entity.Plot;
-import com.mini.agro.backend.service.SavePlotService;
+import com.mini.agro.backend.service.plot.SavePlotService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

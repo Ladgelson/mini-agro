@@ -48,7 +48,7 @@ class FarmTest {
 
     @Test
     void setPlots() {
-        List<Plot> plotsTest = List.of();
+        List<String> plotsTest = List.of();
         farm.setPlots(plotsTest);
         Assertions.assertEquals(Optional.of(plotsTest), Optional.ofNullable(farm.getPlots()));
     }

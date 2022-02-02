@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ public class Farm extends AbstractModel {
 
     private Address address;
 
-    @DBRef
-    private List<Plot> plots = new ArrayList<>();
+    private List<String> plots = new ArrayList<>();
 
 }

@@ -2,12 +2,11 @@ package com.mini.agro.backend.service.impl;
 
 import com.mini.agro.backend.mock.dto.ProductivityDtoMock;
 import com.mini.agro.backend.mock.model.FarmMock;
-import com.mini.agro.backend.mock.model.PlotMock;
 import com.mini.agro.backend.model.dto.ProductivityDto;
 import com.mini.agro.backend.model.entity.Farm;
-import com.mini.agro.backend.service.CalculateProductionByFarmService;
-import com.mini.agro.backend.service.CalculateProductionByPlotService;
-import com.mini.agro.backend.service.FindFarmByIdService;
+import com.mini.agro.backend.service.productivity.CalculateProductionByFarmService;
+import com.mini.agro.backend.service.productivity.CalculateProductionByPlotService;
+import com.mini.agro.backend.service.farm.FindFarmByIdService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,7 +37,7 @@ class CalculateProductionByFarmServiceImplTest {
     @BeforeEach
     void setUp() {
         Farm farm = FarmMock.createFarm();
-        farm.setPlots(List.of(PlotMock.createPlot()));
+        farm.setPlots(List.of("61f6ffd5d7d3c1650890183d"));
         Mockito.when(findFarmByIdService.executeSearch("1"))
                 .thenReturn(farm);
 
@@ -49,10 +48,8 @@ class CalculateProductionByFarmServiceImplTest {
     @Test
     @DisplayName("Must calculate productivity about an entire farm")
     void process() {
-        ProductivityDto result = calculateProductionByFarmService.process("1");
-        ProductivityDto mock = ProductivityDtoMock.createProductivityDto();
-        assertEquals(mock.getArea(), result.getArea());
-        assertEquals(mock.getProductivity(), result.getProductivity());
-        assertEquals(mock.getTotal(), result.getTotal());
+        List<ProductivityDto> result = calculateProductionByFarmService.process("1");
+        List<ProductivityDto> mocks = List.of(ProductivityDtoMock.createProductivityDto());
+        assertEquals(mocks.size(), result.size());
     }
 }

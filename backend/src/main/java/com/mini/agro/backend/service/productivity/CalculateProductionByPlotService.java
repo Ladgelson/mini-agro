@@ -1,4 +1,4 @@
-package com.mini.agro.backend.service;
+package com.mini.agro.backend.service.productivity;
 
 import com.mini.agro.backend.model.dto.ProductivityDto;
 

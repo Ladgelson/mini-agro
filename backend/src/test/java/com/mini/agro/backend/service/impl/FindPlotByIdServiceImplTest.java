@@ -3,7 +3,7 @@ package com.mini.agro.backend.service.impl;
 import com.mini.agro.backend.mock.model.PlotMock;
 import com.mini.agro.backend.model.entity.Plot;
 import com.mini.agro.backend.repository.PlotRepository;
-import com.mini.agro.backend.service.FindPlotByIdService;
+import com.mini.agro.backend.service.plot.FindPlotByIdService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -3,7 +3,7 @@ package com.mini.agro.backend.controller.impl;
 import com.mini.agro.backend.controller.FindPlotController;
 import com.mini.agro.backend.mapper.PlotMapper;
 import com.mini.agro.backend.model.dto.PlotDto;
-import com.mini.agro.backend.service.FindPlotService;
+import com.mini.agro.backend.service.plot.FindPlotService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

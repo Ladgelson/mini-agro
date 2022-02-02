@@ -1,19 +1,19 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.farm.impl;
 
 import com.mini.agro.backend.model.entity.Farm;
 import com.mini.agro.backend.repository.FarmRepository;
-import com.mini.agro.backend.service.SaveFarmService;
+import com.mini.agro.backend.service.farm.FindFarmByIdService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class SaveFarmServiceImpl implements SaveFarmService {
+public class FindFarmByIdServiceImpl implements FindFarmByIdService {
 
     private final FarmRepository repository;
 
     @Override
-    public Farm executeSave(Farm farm) {
-        return repository.save(farm);
+    public Farm executeSearch(String id) {
+        return repository.findById(id).get();
     }
 }

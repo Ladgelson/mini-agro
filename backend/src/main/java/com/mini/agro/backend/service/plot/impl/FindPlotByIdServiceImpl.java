@@ -1,8 +1,8 @@
-package com.mini.agro.backend.service.impl;
+package com.mini.agro.backend.service.plot.impl;
 
 import com.mini.agro.backend.model.entity.Plot;
 import com.mini.agro.backend.repository.PlotRepository;
-import com.mini.agro.backend.service.FindPlotByIdService;
+import com.mini.agro.backend.service.plot.FindPlotByIdService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

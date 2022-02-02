@@ -4,7 +4,7 @@ import com.mini.agro.backend.controller.FindFarmByIdController;
 import com.mini.agro.backend.mapper.FarmMapper;
 import com.mini.agro.backend.model.dto.FarmDto;
 import com.mini.agro.backend.model.entity.Farm;
-import com.mini.agro.backend.service.FindFarmByIdService;
+import com.mini.agro.backend.service.farm.FindFarmByIdService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

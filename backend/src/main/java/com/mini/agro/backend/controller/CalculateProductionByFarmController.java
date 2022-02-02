@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Tag(name = "Productivity", description = "Calculate the productivity about a domain")
 @RequestMapping("/v1/farms")
 public interface CalculateProductionByFarmController {
@@ -24,5 +26,5 @@ public interface CalculateProductionByFarmController {
                     )}),
             @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)})
     @GetMapping("/{id}/productivity")
-    ResponseEntity<ProductivityDto> process(@PathVariable String id);
+    ResponseEntity<List<ProductivityDto>> process(@PathVariable String id);
 }

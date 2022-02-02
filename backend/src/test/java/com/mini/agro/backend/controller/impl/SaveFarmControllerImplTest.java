@@ -3,7 +3,7 @@ package com.mini.agro.backend.controller.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mini.agro.backend.mock.model.FarmMock;
 import com.mini.agro.backend.model.entity.Farm;
-import com.mini.agro.backend.service.SaveFarmService;
+import com.mini.agro.backend.service.farm.SaveFarmService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,7 +40,7 @@ class SaveFarmControllerImplTest {
     @BeforeEach
     void setUp() {
         farmMock = FarmMock.createFarm();
-        Mockito.when(saveFarmService.executeSave(farmMock))
+        Mockito.when(saveFarmService.executeSave(any()))
                 .thenReturn(farmMock);
     }
 

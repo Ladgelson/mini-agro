@@ -3,7 +3,7 @@ package com.mini.agro.backend.service.impl;
 import com.mini.agro.backend.mock.model.FarmMock;
 import com.mini.agro.backend.model.entity.Farm;
 import com.mini.agro.backend.repository.FarmRepository;
-import com.mini.agro.backend.service.FindFarmService;
+import com.mini.agro.backend.service.farm.FindFarmService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
