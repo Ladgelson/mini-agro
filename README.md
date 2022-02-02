@@ -10,13 +10,13 @@ por um Frontend simples com Angular.
 
 Fazer um clone do projeto:
 
-```json
+```text
 git clone https://github.com/Ladgelson/mini-agro.git
 ```
 
 ### Passo 2:
 Criar banco de dados MongoDB com o docker na raiz do projeto:
-```json
+```text
 docker-compose up -d
 ```
 
@@ -24,26 +24,26 @@ docker-compose up -d
 Abrir pasta do backend, baixar dependencias do Maven e rodar aplicação Spring Boot.
 Para verificar Swagger da aplicação:
 
-```json
+```text
 http://localhost:8081/swagger-ui/index.html
 ```
 
 ### Passo 4:
 Baixar dependencia do projeto com o comando:
 
-```json
+```text
 npm i
 ```
 
 ### Passo 5:
 Rodar aplicação Angular com o comando:
-```json
+```text
 ng serve
 ```
 
 ### Passo 6:
 Verificar frontend da aplicação em:
 
-```json
+```text
 http://localhost:4200/
 ```
