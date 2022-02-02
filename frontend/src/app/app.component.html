@@ -1,0 +1,288 @@
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#addFarmModal">Cadastrar Fazenda</a>
+  </li>
+</ul>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" integrity="sha512-W3ZfgmZ5g1rCPFiCbOb+tn7g7sQWOQCB1AkDqrBG1Yp3iDjY9KYFh/k1AWxrt85LX5BRazEAuv+5DV2YZwghag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<section class="team-section py-5">
+  <div class="container" id="main-container">
+	    <div *ngFor="let farm of farms; let i= index" class="row justify-content-center">
+		    <div class="col-12 col-md-6">
+			    <div class="card border-0 shadow-lg pt-5 my-5 position-relative">
+				    <div class="card-body p-4">
+					    <div class="member-profile position-absolute w-100 text-center">
+                <img class="rounded-circle mx-auto d-inline-block shadow-sm" src='{{ "https://bootdey.com/img/Content/avatar/avatar" + (i+1)%6 + ".png" }}' alt="">
+              </div>
+					    <div class="card-text pt-1">
+						    <h5 class="member-name mb-0 text-center text-primary font-weight-bold">{{farm.tradeName}}</h5>
+						    <div class="mb-3 text-center">{{farm.legalName}} | {{farm.cnpj}}</div>
+                <div class="row">
+                  <div class="col-6">
+                    <div><strong>Cidade: </strong> {{farm.address.city}}</div>
+                    <div><strong>País: </strong>{{farm.address.country}}</div>
+                    <div><strong>Estado: </strong>{{farm.address.province}}</div>
+                  </div>
+                  <div class="col-6">
+                    <div><strong>Rua: </strong>{{farm.address.street}}</div>
+                    <div><strong>CEP: </strong>{{farm.address.zipCode}}</div>
+                    <div><strong>N°: </strong>{{farm.address.number}}</div>
+                  </div>
+                </div>
+                <div>
+                  <strong>Quantidade de Talhões: </strong>
+                  {{ farm?.plots?.length ? farm.plots.length : 0 }}
+                </div>
+                <div *ngIf="farm?.plots && farm.plots.length != 0" class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne ">
+                      <button (click)="togglePlot(farm.id)" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <strong>Ver talhões</strong>
+                      </button>
+                    </h2>
+                    <div id="collapseOne" [ngClass]="{show: showPlotsOfFarm[farm.id]}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div *ngFor="let plot of plots[farm.id]" class="accordion-body">
+                        <div class="row">
+                          <div class="col-8">
+                            <div><strong>id: </strong> {{plot.id}}</div>
+                            <div><strong>Area: </strong>{{plot.area}} <strong>m²</strong></div>
+                          </div>
+                          <div class="col-4">
+                            <div class="row plot-buttons">
+                              <button (click)="findProductionRecords(plot.id)" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#listProductionRecordModal">
+                                Registros de Produção
+                              </button>
+                              <button (click)="calculateProductivityByPlot(plot.id)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                                Calcular Produtividade
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <strong>Última data de atualização: </strong>
+                  {{farm.lastModifiedDate | date: "dd/MM/yyyy hh:mm:ss"}}
+                </div>
+					    </div>
+				    </div><!--//card-body-->
+				    <div class="card-footer theme-bg-primary border-0 text-center card-footer-buttons">
+              <button (click)="setSelectedFarmId(farm.id)" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addPlotModal">
+                Cadastrar Talhão
+              </button>
+              <button (click)="calculateProductivityByFarm(farm.id)" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                Calcular Produtividade
+              </button>
+				    </div><!--//card-footer-->
+			    </div><!--//card-->
+		    </div><!--//col-->
+	    </div><!--//row-->
+    </div>
+
+  <!-- productivity modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Produtividade</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div *ngIf="productivityByPlot" class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <div><strong>Produtividade: </strong> {{productivityByPlot.productivity}} sacos por hectare</div>
+              <div><strong>Area: </strong>{{productivityByPlot.area}} m²</div>
+              <div><strong>Total: </strong>{{productivityByPlot.total}} sacos</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="productivityByFarm" class="modal-body">
+          <div *ngFor="let productivity of productivityByFarm" class="modal-body">
+            <div class="row">
+              <div class="col-12">
+                <div><strong>Produtividade: </strong> {{productivity.productivity}} sacos por hectare</div>
+                <div><strong>Area: </strong>{{productivity.area}} m²</div>
+                <div><strong>Total: </strong>{{productivity.total}} sacos</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="productivityByFarm.length == 0" class="modal-body">
+            <div class="row">
+              <div class="col-12">
+                <div><strong>Nenhum registro de produção encontrado</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Farm Modal -->
+  <div class="modal fade" id="addFarmModal" tabindex="-1" role="dialog" aria-labelledby="addFarmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addFarmModalLabel">Adicionar Fazenda</h5>
+        </div>
+        <div class="modal-body">
+          <form #addFarmForm="ngForm" (ngSubmit)="onAddFarm(addFarmForm)">
+            <div class="form-group">
+              <label for="cnpj">CNPJ</label>
+              <input type="text" ngModel name="cnpj" class="form-control" id="cnpj" placeholder="xx.xxx.xxx/xxxx-xx" required>
+            </div>
+            <div class="form-group">
+              <label for="legalName">Nome Legal:</label>
+              <input type="text" ngModel name="legalName" class="form-control" id="legalName" placeholder="ex: Nome Legal Generico" required>
+            </div>
+            <div class="form-group">
+              <label for="tradeName">Nome Fantasia:</label>
+              <input type="text" ngModel name="tradeName" class="form-control" id="tradeName" placeholder="ex: Nome Fantasia Generico" required>
+            </div>
+            <label style="margin-top: 1rem;">Endereço:</label>
+            <div ngModelGroup="address">
+              <div class="form-group">
+                <label for="country">Pais:</label>
+                <input type="text" ngModel name="country" class="form-control" id="country" placeholder="ex: Brasil" required>
+              </div>
+              <div class="form-group">
+                <label for="city">Cidade:</label>
+                <input type="text" ngModel name="city" class="form-control" id="city" placeholder="ex: São José Dos Campos" required>
+              </div>
+              <div class="form-group">
+                <label for="province">Estado:</label>
+                <input type="text" ngModel name="province" class="form-control" id="province" placeholder="ex: Rio Grande do Sul" required>
+              </div>
+              <div class="form-group">
+                <label for="street">Rua:</label>
+                <input type="text" ngModel name="street" class="form-control" id="street" placeholder="ex: Rua Casa Suja" required>
+              </div>
+              <div class="form-group">
+                <label for="zipCode">CEP: </label>
+                <input type="text" ngModel name="zipCode" class="form-control" id="zipCode" placeholder="ex: 59080-000" required>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button [disabled]="addFarmForm.invalid" type="submit" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  plot modal-->
+  <div class="modal fade" id="addPlotModal" tabindex="-1" role="dialog" aria-labelledby="addPlotModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addPlotModalLabel">Adicionar Talhão</h5>
+        </div>
+        <div class="modal-body">
+          <form #addPlotForm="ngForm" (ngSubmit)="onAddPlot(addPlotForm, selectedFarmId)">
+            <div class="form-group">
+              <label for="areaValue">Area:</label>
+              <input type="text" ngModel name="area" class="form-control" id="areaValue" placeholder="" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="add-plot-form" class="btn btn-secondary" data-dismiss="#addPlotModal">Fechar</button>
+              <button [disabled]="addPlotForm.invalid" type="submit" class="btn btn-primary" >Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  list productionRecord modal-->
+  <div class="modal fade" id="listProductionRecordModal" tabindex="-1" role="dialog" aria-labelledby="listProductionRecordLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="listProductionRecordLabel">Registros de produção:</h5>
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#productionRecordModal">
+            Criar registro
+          </button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let productionRecord of productionRecords">
+            <div class="row">
+              <div class="col-12 modal-body production-record-hover">
+                <div><strong>Id: </strong>{{productionRecord.id}} </div>
+                <div><strong>Nome da Commodity: </strong> {{productionRecord.commodity.name}}</div>
+                <div><strong>Tipo da Commodity: </strong> Grão</div>
+                <div><strong>Plantas por hectare: </strong> {{productionRecord.plantsByHectare}}</div>
+                <div><strong>Vagens por planta: </strong> {{productionRecord.podsByPlant}}</div>
+                <div><strong>Grãos por vagem: </strong> {{productionRecord.grainsByPod}} grãos</div>
+                <div><strong>Peso por 1000 grãos: </strong> {{productionRecord.weightByOneKGrains}}</div>
+                <div><strong>Produtividade: </strong> {{productionRecord.productivity}} sacos por hectare</div>
+                <div><strong>Última data atualização: </strong> {{productionRecord.lastModifiedDate | date: "dd/MM/yyyy hh:mm:ss"}}</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="productionRecords == null || productionRecords.length == 0" class="modal-body">
+            Nenhum registro de produção cadastrado.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  production record modal-->
+  <div class="modal fade" id="productionRecordModal" tabindex="-1" role="dialog" aria-labelledby="productionRecordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productionRecordModalLabel">Adicionar Talhão</h5>
+        </div>
+        <div class="modal-body">
+          <form #productionRecordForm="ngForm" (ngSubmit)="onAddProductionRecord(productionRecordForm, selectedPlotId)">
+            <div class="form-group">
+              <label for="plantsByHectare">Plantas por hectare:</label>
+              <input type="text" ngModel name="plantsByHectare" class="form-control" id="plantsByHectare" required>
+            </div>
+            <div class="form-group">
+              <label for="podsByPlant">Vagens por plantas:</label>
+              <input type="text" ngModel name="podsByPlant" class="form-control" id="podsByPlant" required>
+            </div>
+            <div class="form-group">
+              <label for="grainsByPod">Grãos por vagem:</label>
+              <input type="text" ngModel name="grainsByPod" class="form-control" id="grainsByPod" required>
+            </div>
+            <div class="form-group">
+              <label for="weightByOneKGrains">Peso de 1000 grãos:</label>
+              <input type="text" ngModel name="weightByOneKGrains" class="form-control" id="weightByOneKGrains" required>
+            </div>
+            <label style="margin-top: 1rem;">Commodity:</label>
+            <div ngModelGroup="commodity">
+              <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" ngModel name="name" class="form-control" id="name" placeholder="ex: Soja" required>
+              </div>
+              <div class="form-group">
+                <label for="typeCommodity">Tipo de commodity:</label>
+                <input type="text" ngModel name="typeCommodity" class="form-control" id="typeCommodity" placeholder="ex: GRAIN" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="production-record-form" class="btn btn-secondary" data-dismiss="#productionRecordModal">Fechar</button>
+              <button [disabled]="productionRecordForm.invalid" type="submit" class="btn btn-primary" >Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

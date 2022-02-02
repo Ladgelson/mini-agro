@@ -1,0 +1,13 @@
+.card-footer-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.plot-buttons {
+  button {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.production-record-hover:hover {
+  background-color: #D3D3D3;
+}
